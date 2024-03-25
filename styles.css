@@ -5,10 +5,10 @@
 }
 
 :root {
-  --primary-clr: #211951;
-  --secondary-clr: #836FFF;
-  --tertiary-clr: #15F5BA;
-  --last-clr: #F0F3FF;
+  --primary-clr: #FDF7E4;
+  --secondary-clr: #FAEED1;
+  --tertiary-clr: #DED0B6;
+  --last-clr: #BBAB8C;
 }
 
 *,
@@ -19,23 +19,16 @@
   box-sizing: border-box;
 }
 
-dialog {
-  width: 300px;
-  padding: 20px;
-  background-color: var(--secondary-clr);
-  border: 1px solid var(--last-clr);
-  border-radius: 5px;
-}
-
 body {
   height: 100svh;
   font-family: "Tauri", sans-serif;
+  background-color: var(--primary-clr);
 }
 
 header > a > svg {
   width: 24px;
   height: 24px;
-  fill: #FEFDED;
+  fill: var(--last-clr);
 }
 
 header > a:hover {
@@ -55,4 +48,49 @@ header p {
   font-size: 3rem;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  height: calc(100svh - 124px);
+}
 
+main > div > p {
+  color: var(--last-clr);
+  font-size: 1.5rem;
+}
+
+main > div > a > svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--last-clr);
+}
+
+main > div > a:hover {
+  cursor: pointer;
+}
+
+main > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+main > div:nth-child(2) {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  gap: 2rem;;
+}
+
+main > div:nth-child(2) > div {
+  width: 200px;
+  height: 400px;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
