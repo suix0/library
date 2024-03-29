@@ -54,7 +54,7 @@ main {
   align-items: center;
   padding: 2rem;
   gap: 1rem;
-  /* height: calc(100svh - 124px); */
+  position: relative;
 }
 
 main > div > p {
@@ -147,5 +147,61 @@ main > div:first-child {
 .book > div > div > p{
   font-size: 1.2rem;
   color: var(--last-clr);
+}
 
+#modal[open] {
+  border: 0px;
+  border-radius: 1rem;
+  margin: 5rem auto auto auto;
+  width: 250px;
+}
+
+
+#modal::backdrop {
+  background-color: rgb(0, 0, 0, 0, 5);
+}
+
+form > label {
+  font-weight: bold ;
+  color: var(--last-clr);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  gap: 6px;
+  background-color: var(--primary-clr);
+}
+
+form > div {
+  width: max-content;
+}
+
+form > div > button:first-child,
+form > div > button:nth-child(2) {
+  width: 5rem;
+  padding: 4px;
+  border: 1px solid var(--last-clr);
+  color: var(--secondary-clr);
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+form > div > button:first-child {
+  background-color: red;
+}
+
+form > div > button:nth-child(2) {
+  background-color: var(--last-clr);
+}
+
+input {
+  border-radius: 10px;
+  border: 1px solid var(--last-clr);
+  width: 80%;
+  padding: 6px;
 }
