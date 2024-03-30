@@ -11,7 +11,9 @@ function Book(title, author, pages, read) {
 
 function addToLibrary() {
     const form = document.querySelector('form');
-    form.addEventListener('click', (event) => {
+    const submit = document.querySelector('.submit');
+    const myModal = document.getElementById('modal');
+    submit.addEventListener('click', (event) => {
         event.preventDefault();
 
         // Store form values
@@ -22,13 +24,14 @@ function addToLibrary() {
 
         const book = new Book(title, author, pages, read);
 
-        // Push book to the library
-        myLibrary.push(book);
-        const myModal = document.getElementById('modal');
-        myModal.close();
-        console.log(myLibrary);
-        // Clear text content pf input after closing modal
-        form.reset();
+        // Close Modal after submitting and Clear text content of input after closing modal
+        if ((title !== '') && (author !== '') && (pages !== '')) {
+            // Push book to the library
+            myLibrary.push(book);
+            console.log(myLibrary);
+            myModal.close();
+            form.reset();
+        }
     })
 }
 
@@ -55,8 +58,8 @@ function displayModal() {
     modalClose.addEventListener('click', () => myModal.close());
 }
 
-addToLibrary();
 displayModal();
+addToLibrary();  
 
 
 
