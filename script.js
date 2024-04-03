@@ -1,5 +1,5 @@
 const myLibrary = [
-    {title: 'The Hobbit', author: 'J.R.R. Tolkien', pages: '295', read: true},
+    {Title: 'The Hobbit', Author: 'J.R.R. Tolkien', Pages: '295', Read: true},
 ];
 
 function Book(title, author, pages, read) {
@@ -7,6 +7,80 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+}
+
+function createBook() {
+    // container for the book
+    const container = document.querySelector(".book-container");
+    
+    // store the keys in an array
+    const keys = Object.keys(myLibrary[0]);
+
+        
+    // store the values in an array
+    const values = Object.values(myLibrary[myLibrary.length - 1]);
+    
+    // create the container to contain the text contents of the book
+    const bookInformation = document.createElement('div');
+    bookInformation.classList.add('book');
+    container.appendChild(bookInformation);
+
+    const outerSectionDiv = document.createElement('div');
+    bookInformation.appendChild(outerSectionDiv);
+
+    for (let i = 0; i < 4; i++) {
+        const sectionDiv = document.createElement('div');
+        
+        const head = document.createElement('h4');
+        head.textContent = keys[i];
+        const info = document.createElement('p');
+        info.textContent = values[i];
+
+        sectionDiv.appendChild(head);
+        sectionDiv.appendChild(info);
+        outerSectionDiv.appendChild(sectionDiv)
+    }
+
+    // create the icons and buttons 
+    const iconsDiv = document.createElement('div');
+    iconsDiv.classList.add('icons');
+    const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const iconPath = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path'
+    );
+    const svgTitle = document.createElement('title');
+    svgTitle.textContent = "book";
+    iconSvg.setAttribute('viewBox', '0 0 24 24');
+    
+    iconPath.setAttribute('d', 'M18,22A2,2 0 0,0 20,20V4C20,2.89 19.1,2 18,2H12V9L9.5,7.5L7,9V2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18Z');
+
+    iconSvg.appendChild(svgTitle);
+    iconSvg.appendChild(iconPath);
+    iconsDiv.appendChild(iconSvg);
+    bookInformation.appendChild(iconsDiv);
+    
+    // read and delete buttons
+    const buttonContainer = document.createElement('div');
+    const button1 = document.createElement('button');
+    const button2 = document.createElement('button');
+
+    button1.classList.add('read');
+    button2.classList.add('delete');
+
+    button1.textContent = 'Read Status';
+    button2.textContent = 'Delete';
+    
+    buttonContainer.appendChild(button1)
+    buttonContainer.appendChild(button2);
+    
+    iconsDiv.appendChild(buttonContainer);
+}
+
+
+
+function displayBook() {
+    return myLibrary[myLibrary.length - 1];
 }
 
 function addToLibrary() {
@@ -24,10 +98,13 @@ function addToLibrary() {
 
         const book = new Book(title, author, pages, read);
 
+        
         // Close Modal after submitting and Clear text content of input after closing modal
         if ((title !== '') && (author !== '') && (pages !== '')) {
             // Push book to the library
             myLibrary.push(book);
+            createBook();
+            displayBook();
             console.log(myLibrary);
             myModal.close();
             form.reset();
@@ -35,17 +112,6 @@ function addToLibrary() {
     })
 }
 
-
-function displayBook() {
-    // container for the book
-    const container = document.querySelector(".book-container");
-    
-    // create necessary HTML elements for book display
-    
-    // loop through the library array and add the values to the HTML elements
-    
-    // push the book to the container
-}
 
 
 function displayModal() {
@@ -58,9 +124,11 @@ function displayModal() {
     modalClose.addEventListener('click', () => myModal.close());
 }
 
-displayModal();
-addToLibrary();  
+function main() {
+    displayModal();
+    // createBook();
+    addToLibrary();  
+    // displayBook();
+}
 
-
-
- 
+main();

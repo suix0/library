@@ -112,7 +112,7 @@ main > div:first-child {
   padding: 1rem;
 }
 
-.book > div:nth-child(2) {
+.icons {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -121,11 +121,10 @@ main > div:first-child {
   width: 150px;
 }
 
-.book > div:nth-child(2) > div{
+.icons > div{
   padding: 1rem;
 }
-
-.book > div:nth-child(2) > div > button {
+.icons > div > button {
   width: 100%;
   margin-top: 1rem;
   border: 1px solid var(--secondary-clr);
@@ -137,7 +136,7 @@ main > div:first-child {
   height: 30px;
 }
 
-.book > div:nth-child(2) > div > button:nth-child(2) {
+.icons div > button:nth-child(2) {
   background-color: red;
   cursor: pointer;
   color: var(--primary-clr);
