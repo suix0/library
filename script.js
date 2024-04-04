@@ -9,6 +9,7 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+let stat = 0;
 function createBook() {
     // container for the book
     const container = document.querySelector(".book-container");
@@ -23,6 +24,7 @@ function createBook() {
     // create the container to contain the text contents of the book
     const bookInformation = document.createElement('div');
     bookInformation.classList.add('book');
+    bookInformation.setAttribute('data-book-index', `${stat}`)
     container.appendChild(bookInformation);
 
     const outerSectionDiv = document.createElement('div');
@@ -66,8 +68,10 @@ function createBook() {
     const button2 = document.createElement('button');
 
     button1.classList.add('read');
+    button1.classList.add(`status${stat}`);
     button2.classList.add('delete');
-
+    button2.setAttribute('data-book-delete', `${stat}`);
+    stat++;
     button1.textContent = 'Read Status';
     button2.textContent = 'Delete';
     
@@ -84,7 +88,7 @@ function displayBook() {
 }
 
 function addToLibrary() {
-    const form = document.querySelector('form');
+    const form = document.querySelector('.addBook');
     const submit = document.querySelector('.submit');
     const myModal = document.getElementById('modal');
     submit.addEventListener('click', (event) => {
@@ -94,7 +98,9 @@ function addToLibrary() {
         let title = document.querySelector('.title').value;
         let author = document.querySelector('.author').value;
         let pages = document.querySelector('.pages').value;
-        let read = document.querySelector('.read').checked;
+        let read = document.querySelector('.isread').checked;
+        
+        read ? read = "Yes" : read = "No";
 
         const book = new Book(title, author, pages, read);
 
@@ -105,14 +111,13 @@ function addToLibrary() {
             myLibrary.push(book);
             createBook();
             displayBook();
-            console.log(myLibrary);
             myModal.close();
             form.reset();
+            removeBook();
+            // readStatus();
         }
     })
 }
-
-
 
 function displayModal() {
     // Open and Close Dialog modal
@@ -124,11 +129,35 @@ function displayModal() {
     modalClose.addEventListener('click', () => myModal.close());
 }
 
+function removeBook() {
+    const deleteButtons = document.querySelectorAll('[data-book-delete]');
+    const books = document.querySelectorAll('[data-book-index]');
+    const delBooksArr = [...deleteButtons];
+    const booksArr = [...books];
+    for (let i = 0; i < booksArr.length; i++) {
+        delBooksArr[i].addEventListener('click', () => {
+            booksArr[i].remove();
+        })
+    }
+}
+
+function readStatus() {
+    const readStatusModal = document.getElementById('isReadModal');
+    
+    const radios = document.getElementsByName('isRead');
+    
+    const readStatusForm = document.querySelector('.readStatusForm');
+    
+    readStatusButton.addEventListener('click', () => readStatusModal.showModal());
+    
+    
+
+    
+}
+
 function main() {
     displayModal();
-    // createBook();
     addToLibrary();  
-    // displayBook();
 }
 
 main();

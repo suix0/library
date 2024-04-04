@@ -27,7 +27,7 @@
       </a>
 
       <dialog id="modal">
-        <form action="#">
+        <form action="#" class="addBook">
           <label for="title">Title</label>
           <input type="text" id="title" name="title" class="title" required>
 
@@ -37,8 +37,8 @@
           <label for="pages">Pages</label>
           <input type="number" id="pages" name="pages" class="pages" required>
 
-          <label for="read">Read</label>
-          <input type="checkbox" id="read" name="read" class="read" required>
+          <label for="isread">Read</label>
+          <input type="checkbox" id="isread" name="isread" class="isread" required>
 
           <div>
             <button class="close" id="closeModal">Close</button>
@@ -51,6 +51,22 @@
     <div class="book-container">
 
     </div>
+
+    <dialog id="isReadModal">
+      <form action="#" class="readStatusForm">
+        <h1>Read?</h1>
+          <label for="yes">Yes</label>
+          <input type="radio" name="isRead" id="yes" class="yes">
+          
+          <label for="no">No</label>
+          <input type="radio" name="isRead" id="no" class="no">
+
+          <div>
+            <button class="close" id="closeModal">Close</button>
+            <button type="submit" class="submitReadStatus">Submit</button>
+          </div>
+      </form>
+    </dialog>
 
   </main>
 </body>
