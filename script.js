@@ -1,12 +1,11 @@
 const myLibrary = [
-    {Title: 'The Hobbit', Author: 'J.R.R. Tolkien', Pages: '295', Read: true},
 ];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+function Book(Title, Author, Pages, Read) {
+    this.Title = Title;
+    this.Author = Author
+    this.Pages = Pages;
+    this.Read = Read;
 }
 
 let stat = 0;
@@ -68,7 +67,7 @@ function createBook() {
     const button2 = document.createElement('button');
 
     button1.classList.add('read');
-    button1.classList.add(`status${stat}`);
+    button1.setAttribute('data-read', `${stat}`);
     button2.classList.add('delete');
     button2.setAttribute('data-book-delete', `${stat}`);
     stat++;
@@ -114,7 +113,7 @@ function addToLibrary() {
             myModal.close();
             form.reset();
             removeBook();
-            // readStatus();
+            readStatus();
         }
     })
 }
@@ -123,10 +122,16 @@ function displayModal() {
     // Open and Close Dialog modal
     const myModal = document.getElementById('modal');
     const openModal = document.querySelector('.openModal');
-    const modalClose = document.querySelector('.close');
-    openModal.addEventListener('click', () => myModal.showModal());
 
-    modalClose.addEventListener('click', () => myModal.close());
+    const modalClose = document.querySelector('.close');
+    const form = document.querySelector('.addBook');
+
+    openModal.addEventListener('click', () => myModal.showModal());
+    modalClose.addEventListener('click', () => {
+        myModal.close();
+        form.reset();
+    });
+
 }
 
 function removeBook() {
@@ -136,23 +141,27 @@ function removeBook() {
     const booksArr = [...books];
     for (let i = 0; i < booksArr.length; i++) {
         delBooksArr[i].addEventListener('click', () => {
+            myLibrary.splice(i, 1);
             booksArr[i].remove();
         })
     }
 }
 
 function readStatus() {
-    const readStatusModal = document.getElementById('isReadModal');
-    
-    const radios = document.getElementsByName('isRead');
-    
-    const readStatusForm = document.querySelector('.readStatusForm');
-    
-    readStatusButton.addEventListener('click', () => readStatusModal.showModal());
-    
-    
+    const radio = document.getElementsByName('isRead');
+    console.log(radio);
+    const readModal = document.getElementById('isReadModal');
 
+    // Apply an event listener to each book instance's read status modal
+    const readStatusButton = document.querySelectorAll('[data-read]');
     
+    [...readStatusButton].forEach(button => {
+        button.addEventListener('click', () => readModal.showModal());
+    })
+
+    // Apply an event listener to close the modal
+    const closeButton = document.querySelector('.closeRead');
+    closeButton.addEventListener('click', () => readModal.close());
 }
 
 function main() {

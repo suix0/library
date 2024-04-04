@@ -183,7 +183,7 @@ form > div {
 
 form > h1 {
   color: var(--last-clr);
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 form > div > button:first-child,
