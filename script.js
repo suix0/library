@@ -16,7 +16,6 @@ function createBook() {
     // store the keys in an array
     const keys = Object.keys(myLibrary[0]);
 
-        
     // store the values in an array
     const values = Object.values(myLibrary[myLibrary.length - 1]);
     
@@ -29,7 +28,7 @@ function createBook() {
     const outerSectionDiv = document.createElement('div');
     bookInformation.appendChild(outerSectionDiv);
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
         const sectionDiv = document.createElement('div');
         
         const head = document.createElement('h4');
@@ -65,13 +64,22 @@ function createBook() {
     const buttonContainer = document.createElement('div');
     const button1 = document.createElement('button');
     const button2 = document.createElement('button');
-
-    button1.classList.add('read');
-    button1.setAttribute('data-read', `${stat}`);
+    
+    if (myLibrary[stat].Read === "Yes") {
+        button1.classList.add('read');
+        button1.textContent = "Read";
+        readStatus(button1);
+    } else {
+        button1.classList.add('not-read');
+        button1.textContent = "Not Read"
+        readStatus(button1);
+    }
+    
+    
+    
     button2.classList.add('delete');
     button2.setAttribute('data-book-delete', `${stat}`);
     stat++;
-    button1.textContent = 'Read Status';
     button2.textContent = 'Delete';
     
     buttonContainer.appendChild(button1)
@@ -80,17 +88,14 @@ function createBook() {
     iconsDiv.appendChild(buttonContainer);
 }
 
-
-
 function displayBook() {
     return myLibrary[myLibrary.length - 1];
 }
 
 function addToLibrary() {
     const form = document.querySelector('.addBook');
-    const submit = document.querySelector('.submit');
     const myModal = document.getElementById('modal');
-    submit.addEventListener('click', (event) => {
+    form.addEventListener('submit', (event) => {
         event.preventDefault();
 
         // Store form values
@@ -99,12 +104,10 @@ function addToLibrary() {
         let pages = document.querySelector('.pages').value;
         let read = document.querySelector('.isread').checked;
         
-        read ? read = "Yes" : read = "No";
-
+        read ? read = "Yes" : read = "No"; 
         const book = new Book(title, author, pages, read);
-
         
-        // Close Modal after submitting and Clear text content of input after closing modal
+        // Close Modal after submitting and clear text content of input after closing modal
         if ((title !== '') && (author !== '') && (pages !== '')) {
             // Push book to the library
             myLibrary.push(book);
@@ -112,9 +115,8 @@ function addToLibrary() {
             displayBook();
             myModal.close();
             form.reset();
-            removeBook();
-            readStatus();
         }
+        removeBook();
     })
 }
 
@@ -141,32 +143,47 @@ function removeBook() {
     const booksArr = [...books];
     for (let i = 0; i < booksArr.length; i++) {
         delBooksArr[i].addEventListener('click', () => {
-            myLibrary.splice(i, 1);
+            // myLibrary.splice(i, 1);
             booksArr[i].remove();
         })
     }
 }
 
-function readStatus() {
-    const radio = document.getElementsByName('isRead');
-    console.log(radio);
-    const readModal = document.getElementById('isReadModal');
-
-    // Apply an event listener to each book instance's read status modal
-    const readStatusButton = document.querySelectorAll('[data-read]');
-    
-    [...readStatusButton].forEach(button => {
-        button.addEventListener('click', () => readModal.showModal());
+function readStatus(button) {
+    button.addEventListener('click', () => {
+        if (button.classList.contains("read")) {
+            button.classList.remove('read');
+            button.classList.add('not-read');
+            button.textContent = "Not Read"
+        } else {
+            button.classList.remove('not-read');
+            button.classList.add('read');
+            button.textContent = "Read";
+        }
     })
+}
 
-    // Apply an event listener to close the modal
-    const closeButton = document.querySelector('.closeRead');
-    closeButton.addEventListener('click', () => readModal.close());
+
+function darkLightMode() {
+    const rootElement = document.documentElement;
+    rootElement.classList.add('light');
+    const swithButton = document.querySelector('.lightbulb');
+    swithButton.addEventListener('click', () => {
+        if (rootElement.classList.contains('light')) {
+            rootElement.classList.remove('light');
+            rootElement.classList.add('dark');
+            
+        } else {
+            rootElement.classList.remove('dark');
+            rootElement.classList.add('light');
+        }
+    })
 }
 
 function main() {
     displayModal();
     addToLibrary();  
+    darkLightMode();
 }
 
 main();

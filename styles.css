@@ -9,6 +9,17 @@
   --secondary-clr: #FFF8E3;
   --tertiary-clr: #F3D7CA;
   --last-clr: #E6A4B4;
+  --read: #53c705b0;
+  --not-read: #E6A4B4;
+}
+
+:root.dark {
+  --primary-clr: #424769;
+  --secondary-clr: #2D3250;
+  --tertiary-clr:  #7077A1;
+  --last-clr:  #7077A1;
+  --read: #57ffff;
+  --not-read: #8fc7e7;
 }
 
 *,
@@ -91,7 +102,7 @@ main > div:first-child {
   display: flex;
   border: 2px solid var(--last-clr);
   border-radius: 20px;
-  width: 300px;
+  width: 280px;
   height: 350px;
   background-color: var(--secondary-clr);
 }
@@ -103,10 +114,7 @@ main > div:first-child {
 .book > div:first-child {
   display: flex;
   flex-direction: column;
-  align-content: space-between;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
   text-align: center;
   margin-right: auto;
   padding: 1rem;
@@ -119,21 +127,29 @@ main > div:first-child {
   width: max-content;
   gap: 1rem;
   width: 150px;
+  padding: 1rem;
 }
 
 .icons > div{
   padding: 1rem;
 }
 .icons > div > button {
-  width: 100%;
+  width: 100px;
   margin-top: 1rem;
   border: 1px solid var(--secondary-clr);
-  background-color: var(--last-clr);
   border-radius: 6px;
   color: var(--secondary-clr);
   font-weight: bold;
   cursor: pointer;
   height: 30px;
+}
+
+button.read {
+  background-color: var(--read);
+}
+
+button.not-read {
+  background-color: var(--not-read);
 }
 
 .icons div > button:nth-child(2) {
@@ -211,4 +227,3 @@ input {
   width: 80%;
   padding: 6px;
 }
-
