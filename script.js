@@ -1,11 +1,13 @@
 const myLibrary = [
 ];
 
-function Book(Title, Author, Pages, Read) {
-    this.Title = Title;
-    this.Author = Author
-    this.Pages = Pages;
-    this.Read = Read;
+class Book {
+    constructor(Title, Author, Pages, Read) {
+        this.Title = Title;
+        this.Author = Author
+        this.Pages = Pages;
+        this.Read = Read;
+    }
 }
 
 let stat = 0;
